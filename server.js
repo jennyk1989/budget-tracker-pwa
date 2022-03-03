@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/socialnetdb');
+mongoose.connect(MONGODB_URI || 'mongodb://localhost/budgetdb');
 
 // routes
 app.use(require("./routes/api.js"));
