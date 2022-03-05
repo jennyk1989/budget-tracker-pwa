@@ -36,3 +36,15 @@ self.addEventListener('fetch', function(e) {
     );
 });
 
+// install event (adding files to precache so app can use the cache):
+self.addEventListener('install', function(e) {
+    // waitUntil() fx tells browser to wait until install complete before terminating service worker
+    e.waitUntil(
+        // use caches.open to find specific cache by name
+        caches.open(CACHE_NAME).then(function(cache) {
+            console.log('installing cache: ' + CACHE_NAME);
+            // once specific cache found, add every file in the FILES_TO_CACHE array to cache
+            return cache.addAll(FILES_TO_CACHE);
+        })
+    );
+});
