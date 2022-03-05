@@ -48,3 +48,24 @@ self.addEventListener('install', function(e) {
         })
     );
 });
+
+// activation step -> clear old data from cache & tell service worker how to manage caches
+self.addEventListener('activate', function(e) {
+    e.waitUntil(
+        caches.keys().then(function(keyList) { 
+            //filter out the relevant cache by using APP_PREFEX and then save it to cacheKeepList array
+            let cacheKeepList = keyList.filter(function (key) {
+                return key.indexOf(APP_PREFIX);
+            })
+            // add the current cache to the cacheKeepList array
+            cacheKeepList.push(CACHE_NAME);
+            // this promise resolve once all old versions of cache are deleted
+            return Promise.all(keyList.map(function(key,i) {
+                if(cacheKeepList.indexOf(key) === -1) {
+                    console.log('deleting cache: ' + keyList[i]);
+                    return caches.delete(keyList[i]);
+                }
+            }));
+        })
+    );
+});
