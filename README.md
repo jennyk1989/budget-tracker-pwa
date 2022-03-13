@@ -15,7 +15,8 @@ This is a budget tracker application intended to continue functioning without an
 * npm install
 * npm start
 ## Usage
-### Screenshots
+### Screenshot
+<img width="853" alt="budget-tracker" src="https://user-images.githubusercontent.com/92952780/158042977-99932e61-62f7-4455-8b2b-472a6074ceac.png">
 
 ### Deployed Application on Heroku:
 https://secret-inlet-60607.herokuapp.com/ 
