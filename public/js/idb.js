@@ -12,7 +12,7 @@ request.onupgradeneeded = function(e) {
     //target = element that triggered the event 
     const db = e.target.result; //stores reference to db
     //use createObjectStore to create 'new_budget' object store (table) to store new transaction data
-    db.createObjectStore('new_budget', { autoIncrement: true}); //want autoincrementing index for each new set of data inserted
+    db.createObjectStore('new_budget', { autoIncrement: true }); //want autoincrementing index for each new set of data inserted
 };
 
 // once db successfully created:
@@ -32,14 +32,14 @@ request.onerror = function(e) {
 };
 
 //fx for saving budget when offline
-function saveBudget(record) {
+function saveRecord(record) {
     // to start a transaction: db.transaction(store[,type])
     // open new transaction w/ db + give read and write permissions ('readwrite'):
     const transaction = db.transaction(['new_budget'], 'readwrite');
     // object store = indexeddb's version of a table
     const budgetObjectStore = transaction.objectStore('new_budget');
     // use add method to add the transaction object store:
-    budgetObjectStore.add(transaction);
+    budgetObjectStore.add(record);
 };
 
 function uploadBudget(){
@@ -52,7 +52,7 @@ function uploadBudget(){
     getAll.onsuccess= function() {
         // if data present in the store (length > 0), send it to api server
         if(getAll.result.length > 0) {
-            fetch('api/somethin', {
+            fetch('api/transaction', {
                 method: 'POST',
                 body: JSON.stringify(getAll.result), // result property of getAll = array of data retrieved from object store
                 headers: {
@@ -71,11 +71,9 @@ function uploadBudget(){
                 //clear the data in the object store
                 budgetObjectStore.clear();
             })
-            .catch(err => {
-                console.log(err);
-            });
+            .catch(err => console.log(err));
         };
     };
 };
-
+// execute uploadBudget fx when back online
 window.addEventListener('online', uploadBudget);
