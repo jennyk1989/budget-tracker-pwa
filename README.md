@@ -25,7 +25,7 @@ MIT License
 ## Contribution 💡
 Contributions are not being accepted at this time, thank you!
 ## Tests
-ChromeDev Tools to verify offline data
+Chrome DevTools to verify offline data
 ## Questions 🖐️
 Questions or concerns? </br>
 Find me on GitHub: [jennyk1989](https://github.com/jennyk1989)
