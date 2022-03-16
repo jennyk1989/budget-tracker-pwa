@@ -115,12 +115,15 @@ function sendTransaction(isAdding) {
   // also send to server
   fetch("/api/transaction", {
     method: "POST",
+    body: JSON.stringify(transaction),
     headers: {
-      Accept: '', 'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(transaction)
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json"
+    }
   })
-  .then(response => response.json())
+  .then(response => {    
+    return response.json();
+  })
   .then(data => {
     if (data.errors) {
       errorEl.textContent = "Missing Information";
