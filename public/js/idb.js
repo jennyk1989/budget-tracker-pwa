@@ -49,7 +49,7 @@ function uploadBudget(){
     // use getAll() method to retrieve data for object store and set it to variable getAll
     const getAll = budgetObjectStore.getAll();
     // this event will execute after getAll() method successfully completes
-    getAll.onsuccess= function() {
+    getAll.onsuccess = function() {
         // if data present in the store (length > 0), send it to api server
         if(getAll.result.length > 0) {
             fetch('api/transaction', {
@@ -62,9 +62,9 @@ function uploadBudget(){
             })
             .then(res => res.json())
             //with successful server interaction (online and data uploaded), we can clear the stored data
-            .then(serverRes => {
-                if(serverRes.message) {
-                    throw new Error(serverRes);
+            .then(serverResponse => {
+                if(serverResponse.message) {
+                    throw new Error(serverResponse);
                 }
                 const transaction = db.transaction(['new_budget'], 'readwrite');
                 const budgetObjectStore = transaction.objectStore('new_budget')
