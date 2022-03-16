@@ -116,8 +116,7 @@ function sendTransaction(isAdding) {
   fetch("/api/transaction", {
     method: "POST",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+      Accept: '', 'Content-Type': 'application/json'
     },
     body: JSON.stringify(transaction)
   })
