@@ -17,8 +17,6 @@ const FILES_TO_CACHE = [
     './icons/icon-96x96.png'
 ];
 
-
-
 // install event (adding files to precache so app can use the cache):
 self.addEventListener('install', function(e) {
     // waitUntil() fx tells browser to wait until install complete before terminating service worker
